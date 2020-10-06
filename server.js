@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const response = require('./network/response');
 
 var app = express();
 app.use(bodyParser.json());
@@ -12,11 +13,16 @@ router.get('/message', (req, res) => {
     'custom-header': 'Mi Valor Personalizado',
   });
   console.log(req.body);
-  res.send('Lista de mensajes...');
+  //   res.send('Lista de mensajes...');
+  response.success(req, res, 'Lista de mensajes');
 });
 
 router.post('/message', (req, res) => {
-  res.send('Mensaje creado!');
+  if (req.query.error == 'ok') {
+    response.error(req, res, 'Error Simulado', 400);
+  } else {
+    response.success(req, res, 'Creado correctamente!!!', 201);
+  }
 });
 
 router.delete('/message', (req, res) => {
