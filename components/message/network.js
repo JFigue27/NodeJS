@@ -4,13 +4,14 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log(req.headers);
-  res.header({
-    'custom-header': 'Mi Valor Personalizado',
-  });
-  console.log(req.body);
-  //   res.send('Lista de mensajes...');
-  response.success(req, res, 'Lista de mensajes');
+  controller
+    .getMessages()
+    .then((messageList) => {
+      response.success(req, res, messageList, 200);
+    })
+    .catch((e) => {
+      response.error(req, res, 'Unexpected Error', 500, e);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -21,6 +22,17 @@ router.post('/', (req, res) => {
     })
     .catch((e) => {
       response.error(req, res, 'Informacion invalida', 400, 'Error en el controlodos');
+    });
+});
+
+router.patch('/:id', (req, res) => {
+  controller
+    .updateMessage(req.params.id, req.body.message)
+    .then((data) => {
+      response.success(req, res, data, 200);
+    })
+    .catch((e) => {
+      res.error(req, res, 'Error interno', 500, e);
     });
 });
 
