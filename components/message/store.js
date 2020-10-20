@@ -5,7 +5,7 @@ const Model = require('./model');
 // const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${DB_NAME}?retryWrites=true&w=majority`;
 
 db.Promise = global.Promise;
-db.connect('mongodb+srv://user:*********@cluster0.wuwpz.mongodb.com/db_telegrom', {
+db.connect('mongodb+srv://db_user_platzivideos:685PS696@cluster0.wuwpz.mongodb.net/db_telegrom', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -39,10 +39,14 @@ async function updateMessage(id, message) {
   return newMessage;
 }
 
+function removeMessage(id) {
+  return Model.deleteOne({ _id: id });
+}
+
 module.exports = {
   add: addMessage,
   list: getMessages,
   updateMessage: updateMessage,
   // get
-  // delete
+  remove: removeMessage,
 };
