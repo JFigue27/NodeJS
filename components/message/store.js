@@ -1,16 +1,4 @@
-const db = require('mongoose');
-const model = require('./model');
 const Model = require('./model');
-// mongodb+srv://db_user_platzivideos:*****@cluster0-wuwpz.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true
-// const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${DB_NAME}?retryWrites=true&w=majority`;
-
-db.Promise = global.Promise;
-db.connect('mongodb+srv://db_user_platzivideos:685PS696@cluster0.wuwpz.mongodb.net/db_telegrom', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-console.log('[db] Conectada con éxito');
 
 function addMessage(message) {
   //   list.push(message);
